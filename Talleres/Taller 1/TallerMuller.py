@@ -12,9 +12,11 @@ x**3-2*x**2+ 4/3*x - 8/27
 x**3 -2*x - 5
  fx.append(x[i]**3 -2*x[i] - 5)
 
+(667.38/x)*(1-e**(-0.146843*x))-40
+fx.append((667.38/x[i])*(1-e**(-0.146843*x[i]))-40)
 
-
-
+ if x == 0:
+        x = x + 10**-8
 
 
 
@@ -27,7 +29,9 @@ from numpy.lib.scimath import sqrt
 from matplotlib import pyplot as plt
 
 def f(x):
-    return np.cos(x)**2 - x**2 
+    if x == 0:
+        x = x + 10**-8
+    return e**x - x - 1
 
 
 
@@ -36,7 +40,7 @@ def mostrarGrafica():
     
     fx = []
     for i in range(len(x)):
-        fx.append(cos(x[i])**2 - x[i]**2)
+        fx.append(e**x[i] - x[i] - 1)
 
     plt.plot(x, fx, "r")
     plt.grid()
@@ -65,7 +69,12 @@ def mullerLibro(p0, p1, p2, tol, N0):
     formato = "{:."+str(tol).split('-')[1]+"f}"
     h1 = p1 - p0;
     h2 = p2 - p1;
+    if h1 == 0:
+        h1 = h1+tol
+        
     delta1 = (f(p1) - f(p0))/h1;
+    if h2 == 0:
+        h2 = h2 + tol
     delta2 = (f(p2) - f(p1))/h2;
     d=(delta2 - delta1)/(h2 + h1);
     i=3;
@@ -111,8 +120,10 @@ mostrarGrafica();
 
 raices = set()
 
-for i in range(1,4):
+for i in range(-3,3):
+    print("Intervalo: ", -3+i, -1+i, -2+i)
     raices.add(mullerLibro(-3+i, -1+i, -2+i, 10**-8, 10000))
+    #print("raíz: ", mullerLibro(-3+i, -1+i, -2+i, 10**-56, 10000))
     
 print("Las raíces de la funcion son: ", raices)
 
