@@ -1,0 +1,472 @@
+%CONFIGURACIÓN DEL DOCUMENTO Y HOJA
+
+\documentclass[11pt,letterpaper]{article}
+\setlength{\parindent}{0em}                  %DISTANCIA SANGRÍA
+\setlength{\parskip}{0.5em}                  %DISTANCIA ENTRE PÁRRAFOS
+\textwidth 6.5in
+\textheight 9.in
+\oddsidemargin 0in
+\headheight 0in
+
+%PAQUETES DEL TEMPLATE
+
+\usepackage{fancybox}
+\usepackage[utf8]{inputenc}
+\usepackage{epsfig,graphicx}
+\usepackage{multicol,pst-plot}
+\usepackage{pstricks}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eucal}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{txfonts}
+\usepackage[spanish]{babel}
+\usepackage[colorlinks]{hyperref}
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{upgreek}
+\usepackage{gensymb}
+\usepackage{subfigure}
+\usepackage{siunitx}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage{mdframed}
+
+%DEFINICIÓN DE COLORES EXTRAS
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+%CONFIGURACIÓN DE LSTLISTINGS PARA CÓDIGOS
+
+\lstset{ %
+language=python,                % choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,                   % adds a frame around the code
+tabsize=2,                      % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)}          % if you want to add a comment within your code
+}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{red},
+	keywordstyle=\bfseries\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codegreen},
+	basicstyle=\footnotesize\ttfamily,
+	identifierstyle=\color{blue},
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%CONFIGURACIÓN DE MINTED PARA CÓDIGOS
+
+\usemintedstyle{vs}
+
+%DEFINICIÓN DE COMANDOS EXTRAS
+
+\pagestyle{empty}
+\DeclareMathOperator{\tr}{Tr}                      %ICONO TRAZA MECANICA CUANTICA
+\DeclareMathOperator{\rsol}{R_\odot}               %ICONO RADIO SOLAR
+\DeclareMathOperator{\lsol}{L_\odot}               %ICONO LUMINOSIDAD SOLAR
+\DeclareMathOperator{\msol}{M_\odot}               %ICONO MASA SOLAR
+\DeclareMathOperator{\probabi}{Prob}               %ICONO PROBABILIDAD
+\newcommand{\units}[1]{\left[ #1 \right]}          %CORCHETES PARA UNIDADES
+\newcommand{\prob}[1]{\probabi\left( #1 \right)}   %OPERADOR PROBABILIDAD
+\newcommand{\abs}[1]{\left|#1\right|}              %OPERADOR VALOR ABSOLUTO
+\newcommand{\bra}[1]{\langle #1 |}                 %OPERADOR BRA
+\newcommand{\ket}[1]{| #1 \rangle}                 %OPERADOR KET
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}   %OPERADOR BRA-KET
+\newcommand{\ketbra}[2]{|#1\rangle\langle#2|}      %OPERADOR KET-BRA
+\newcommand{\mean}[1]{\langle #1 \rangle}          %PROMEDIO MECANICA CUANTICA
+\newcommand{\eval}[3]{\left.#1\right|_{#2}^{#3}}   %COMANDO PARA EVALUAR INTEGRALES
+
+%COMIENZA EL DOCUMENTO
+
+\begin{document}
+
+%CONFIGURACIÓN DEL ENCABEZADO
+
+\usetikzlibrary{positioning}
+\tikzset{every picture/.style={line width=0.75pt}}    
+\pagestyle{plain}
+\begin{flushleft}
+Departamento de Ingeniería de sistemas \\
+Facultad de Ingeniería\\
+\underline{Pontificia Universidad Javeriana}
+\end{flushleft}
+
+
+\begin{center}
+\includegraphics[height=5cm]{Logo.png}
+\end{center}
+ 
+ 
+\begin{center}\vspace{-1cm}
+\textbf{\large Ejercicios - interpolación}\\   %TITULO
+Cuestas Samy, Escobar Carlos, Hernández Camilo, Mendieta Juan Camilo \\                         %NOMBRE
+\end{center}
+\rule{\linewidth}{0.1mm}
+
+
+\section{Problema del perrito}
+\label{sec1}
+
+\justify
+1. En este punto se pide reconstruir el perfil superior e inferior de la silueta de un perrito utilizando los puntos dados en el enunciado. \newline
+
+\begin{center}
+\includegraphics[height=8cm]{perruco.png}
+\end{center}
+ 
+\begin{center}
+\includegraphics[height=6cm]{puntos.png}
+\end{center}
+ 
+ \justify
+Solución del problema con Splines cúbicos:
+Como solución inicial al problema se buscó completar la silueta superior del perro, para esto se empleó la interpolación por splines utilizando la función splineout y spline y se utilizó la función points para imprimir la curva generada, la gráfica obtenida se muestra a continuación:  \newline
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{grafica.PNG} 
+    \begin{figure}[h]
+        \centering
+        \caption{Gráfica con splineout}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+ \justify
+Luego se le da una dimensión a la gráfica incluyendo nuevos parametros en la función plot.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{interpolacionperrito.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Gráfica obtenida después de incluir parámetros en la función “plot”.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Después se cambió la función que se estaba utilizando y se utilizó la función spline para generar la gráfica, en la documentación de R se puede encontrar que esta función utiliza splines cúbicos. Usando esta nueva función la curva generada si llegaba a los puntos y el contorno superior del perrito tenía más forma.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{1.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Curva generada con la función “spline”.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Una vez realizado el contorno superior del perrito se buscó realizar el contorno inferior utilizando puntos estimados y 2 splines , uno para el contorno superior y otro spline para el contorno inferior, aunque la visualización no fue satisfactoria.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{2.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{curva generada con puntos estimados y 2 splines.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Posteriormente se intentaron colocar los puntos en un único arreglo y realizar la figura del perrito utilizando un único spline pero nuevamente el resultado no fue el esperado ya que aunque los puntos si correspondían a los del contorno inferior del perro la cura generada tenia demasiados errores.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{3.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Figura obtenida con un único spline.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Finalmente se optó por realizar el contorno del perrito utilizando varios segmentos de splines pero los mismos puntos, la cantidad de splines utilizados fueron 15, los cuales se iban calculando y agregando a la gráfica, de modo que se obtuvo la siguiente figura.
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{4.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Figura obtenida con 15 splines.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Para verificar que la imagen coincide con el relieve del perrito se sobrepuso la imagen sobre la gráfica generada.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{5.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Figura con contorno del perrito sobrepuesto.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\justify
+Otro método que se utilizó fue el método de interpolación polinómica de lagrange, el cual se usó empleando los mismos puntos que en la interpolación por splines, en este caso se aplicó directamente la misma estrategia de aplicar la función repetidamente en diferentes intervalos de puntos para ir creando la silueta del perrito. Sin embargo, en los puntos entre 5 y 10 se presentaron problemas por lo que fue necesario usar más intervalos en esta sección.
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{6.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Silueta del perrito generada con Lagrange.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{7.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Silueta generada con Lagrange con figura del perrito sobrepuesta.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\justify
+
+Se deben responder las siguientes preguntas:
+
+1. ¿Cómo se puede medir el error en términos numéricos de la solución?
+
+Para poder medir el error del ejercicio se compararon los dos métodos utilizados para resolver el ejercicio, interpolación por Splines e interpolación polinómica de Lagrange con los puntos obtenidos en la metodología descrita en el siguiente punto. Para ver las diferencias entre las curvas generadas por cada tipo de interpolación se imprimieron en una misma gráfica, la curva generada por interpolación con splines es de color rojo mientras que la curva generada por la interpolación polinómica de lagrange es de color negro.
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{8.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Comparación curvas con interpolación por splines(rojo) y lagrange (negro)}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\justify
+Luego de graficar los errores con los puntos obtenidos en el punto 2 se obtuvo la siguiente gráfica.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{9.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Gráfica con errores de interpolación con Splines.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{10.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Gráfica de errores con interpolación de Lagrange}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\justify
+También se utilizó la imagen sobrepuesta del perrito para encontrar puntos con los cuales comparar la efectividad de los métodos, se obtuvieron los siguientes resultados: 
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{11.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Tabla de errores con los diferentes métodos de interpolación.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\justify
+2.	Si no se cuenta con la información completa qué metodología se propone para el levantamiento de esta información.
+Como ocurre en este caso, no se cuentan con todos los datos para completar la silueta del perrito ya que se nos da la información del contorno superior del perrito pero no del contorno inferior. Como metodología para la recopilación de esta información se puede tomar el plano del perrito y la imagen del perrito y sobreponerlos de modo que se puedan obtener nuevos puntos para realizar la interpolación. Una vez realizado esto se obtiene la siguiente figura.
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{12.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Puntos obtenidos sobreponiendo la imagen.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+\justify
+Con estos nuevos puntos se obtuvo la siguiente tabla de datos.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{13.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Puntos obtenidos de la gráfica.}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Utilizando este mismo método se tomaron más puntos para compararlos posteriormente para ver qué tan precisa es la curva generada utilizando interpolaciones.
+
+3.	¿Si el problema se extiende a un contexto científico donde puede tener una aplicación?\newline
+
+El problema de interpolación con el perrito puede tener aplicaciones en el campo científico, como se vio en el reto propuesto, cuando se toman datos meteorológicos no se podrán tomar los datos de todos los lugares todo el tiempo. Al investigar más sobre el tema se encontró que es común que se tengan estaciones ubicadas en diferentes zonas para que recopilen información pero estas estaciones no pueden estar en toda la región y sin embargo los datos deben poder permitir tener una idea del clima en la región, por esta razón, al igual que en el problema del perrito la interpolación permite que con un conjunto limitado de datos se pueda estimar otros datos, así como en el perrito se estimaba el contorno de este, en este contexto se usa para predecir las condiciones ambientales en zonas donde no hay estaciones, de la misma forma mientras existan más estaciones cerca de una zona específica se podrán realizar estimaciones más precisas , al igual que el contorno del perrito es más preciso si tiene más puntos.\newline
+
+
+4.	¿Es posible cambiar el origen, moverlo y qué consecuencias cree que tiene esto?\newline
+
+Después de realizar pruebas se pudo determinar que si es posible cambiar el origen de los splines, pero para que no afecten el contorno generado el origen del spline debe ser cambiado por un número que a su vez sea el origen de otro de los splines, en caso contrario la figura del perro cambia.\newline
+
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{14.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Interpolación del perrito con los valores de origen modificados}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+5.	De los elementos de análisis numérico estudiados hasta la fecha, cual o cuales aplicaría para solucionar el problema.\newline
+
+Los elementos aplicados para la solución del problema fueron los de interpolación de splines cúbicos donde se tomaron segmentos de polinomios que se definían por el conjunto de puntos utilizados para generar el polinomio en lugar de utilizar un gran polinomio creado a partir de todos los puntos, uniendo todos los polinomios se forma el contorno del perrito.\newline
+
+6.	Qué herramientas de cómputo utilizaría.\newline
+
+Inicialmente se pensó en utilizar el IDE de Spyder con Python, sin embargo se decidió utilizar el entorno de desarrollo Rstudio con R ya que este lenguaje cuenta con más facilidades a la hora de graficar y librerías que permiten realizar las operaciones de interpolación de forma más sencilla.\newline
+
+7.	Es posible optimizar el método y obtener una buena aproximación numérica, por ejemplo, solucionar el problema con el menor número de puntos.\newline
+
+Si es posible ya que como se pudo observar en el desarrollo el problema no está limitado a un número concreto de puntos ya que para realizar la interpolación se pueden contar con muchos puntos y entre más puntos se tengan se tendrá una mejor representación del contorno. Esta cantidad de puntos puede optimizarse para que sean menos modificando variables como la posición de los puntos escogidos y el método utilizado para realizar la interpolación.\newline
+
+8.	¿Estos problemas se pueden extender a dimensiones como 3D o más aún cómo sería para información espacio temporal?\newline
+
+Si podría extenderse, aunque en estos casos tendrán que realizarse una aproximación nueva por cada unidad de la nueva dimensión que se incluye.\newline
+
+\section{Problema 13 - Gravamen}
+\label{sec2}
+
+\justify
+Dado que, según la legislación vigente, la escala de gravamen del impuesto a la Renta se determina mediante una fórmula correspondiente a una interpolación lineal, y de acuerdo con el fallo por el Tribunal, se propone hacer el cálculo mediante una interpolación por splines cuadráticos y cúbicos de los pares de datos "base imponible, cuota íntegra" de tal forma que sea representada de manera precisa sin sobrecostos la cuota correspondiente. 
+
+Para resolver este problema se utilizó python y los métodos "SplineCubic", "interp1d cuadratic" e "interp1d linear" que reciben un conjunto de datos (los valores de las bases imponibles y/o cuota integra/tipo marginal) para realizar la interpolación correspondiente, la cual en el caso de los dos últimos métodos se especifíca como un parámetro, todo esto con el fin de calcular la cuota y tasa marginal correspondiente a la base imponible de cinco millones.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{datos.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Arreglos de datos dados en el enunciado}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{métodos.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Funciones utilizadas de la librería Scipy}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+
+Una vez hecho tal ajuste al cálculo de la cuota, se evidencia en las siguientes figuras el ahorro correspondiente a la diferencia entre el modelo actual (Lineal) y el modelo propuesto (cúbico ó cuadrático), para una base imponible de 5,000,000 \$.
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{tablaGravemen.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Tabla de impuesto a la renta, comparando diferentes métodos de interpolación con base de 5,000,000}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+Como se puede observar, no hay una diferencia significativa entre las interpolaciones cuadráticas y cúbicas, pero si hay un diferencia de estas con respecto a la del modelo actual (Lineal), por lo que como se ve evidenciado en la tabla, hay un ahorro de al menos 1093 \$ con un tipo marginal del 41.89\% aproximádamente, todo esto para la base imponible de cinco millones, los resultados obtenidos en el algoritmo ejecutado en python son los siguientes:
+
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{gráficaGravemen.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Gráfica de los resultados de la interpolación costo de la cuota de acuerdo a la base imponible}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\begin{center}
+    \includegraphics[width=1\textwidth]{Resultados.PNG}
+    \begin{figure}[h]
+        \centering
+        \caption{Resultados de la ejecución de las diferentes interpolaciones para el cálculo del valor definitivo de la cuota}
+        \label{fig:my_label6}
+    \end{figure}
+\end{center}
+\hfill
+
+\justify
+De acuerdo a estos resultados, si se evidencia un ahorro para el contribuyente cuya base imponible es de cinco millones, pues en el cálculo de la cuota a través de un método cuadrático o cúbico se ve una diferencia de al menos 1093\$ a favor con respecto a la lineal con su correspondiente tipo marginal del 41.89\% aproximadamente, mucho mejor que el siguiente en la escala cuyo valor definido era 43.18\%.
+
+\section{Bibliografía}
+[1] Burden Richard L y Faires J.  Douglas, Numerical Analysis. Cengage Learning, 9ª.  2012.\newline
+
+
+
+\end{document}
