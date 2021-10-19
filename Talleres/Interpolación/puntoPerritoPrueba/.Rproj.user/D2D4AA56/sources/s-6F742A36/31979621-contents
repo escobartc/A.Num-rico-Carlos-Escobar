@@ -1,0 +1,42 @@
+library(PolynomF)
+
+y=c(3,3.7,3.9,4.5,5.7,6.69,7.12,6.7,4.45,7,6.1,5.6,5.87,5.15,4.1,4.3,4.1,3)                                                                                                       
+x=c(1,2,5,6,7,8.1,10,13,17.6,20,23.5,24.5,25,26.5,27.5,28,29,30)     
+length(x)
+length(y)
+
+plot(x,y,  pch = 19, cex=0.5, col= "red",xlim=c(0,31),ylim=c(0,10),asp=1)
+
+x1=x[1:4]
+y1=y[1:4]
+polyAjuste1 = poly_from_values(x1,y1)
+curve(polyAjuste1,from=1,to=6,add=T, lwd=1)
+
+x2=x[4:6]
+y2=y[4:6]
+polyAjuste2 = poly_from_values(x2,y2)
+curve(polyAjuste2,from=6,to=8.1,add=T, lwd=1)
+
+x3=x[6:9]
+y3=y[6:9]
+polyAjuste3 = poly_from_values(x3,y3)
+curve(polyAjuste3,from=8.1,to=17.6,add=T, lwd=1)
+
+x4=x[9:12]
+y4=y[9:12]
+polyAjuste4 = poly_from_values(x4,y4)
+curve(polyAjuste4,from=17.6,to=24.5,add=T, lwd=1)
+
+x5=x[12:15]
+y5=y[12:15]
+polyAjuste5 = poly_from_values(x5,y5)
+curve(polyAjuste5,from=24.5,to=27.5,add=T, lwd=1,col=2)
+
+x6=x[15:18]
+y6=y[15:18]
+polyAjuste6 = poly_from_values(x6, y6)
+curve(polyAjuste6,from=27.5,to=30,add=T, lwd=1,col=2)
+
+xf=c(1,30)
+yf=c(3,3)
+lines(spline(xf, yf, n = 1000), col = colorLinea,xlim=c(0,30),ylim=c(0,9))
